@@ -73,6 +73,18 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.androidx.room.ktx)
 
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.adapter.rxjava2)
+    implementation(libs.logging.interceptor)
+    implementation(libs.converter.scalars)
+
+    implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.moshi)
+    implementation (libs.converter.moshi)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
