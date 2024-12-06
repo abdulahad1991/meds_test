@@ -23,4 +23,5 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App() {
     val navController = rememberNavController()
+    AppNav(navController)
 }
