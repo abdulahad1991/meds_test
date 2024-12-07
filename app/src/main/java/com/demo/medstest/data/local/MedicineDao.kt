@@ -12,6 +12,9 @@ interface MedicineDao {
     @Query("SELECT * FROM medicines")
     suspend fun getAllMedicines(): List<Medicine>
 
+    @Query("SELECT * FROM medicines WHERE id = :medicineId")
+    suspend fun getMedicineById(medicineId: String): Medicine?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMedicines(medicines: List<Medicine>)
 

@@ -16,6 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -27,9 +28,17 @@ import com.demo.medstest.viewmodel.MedicineViewModel
 @Composable
 fun MedicineDetailScreen(
     viewModel: MedicineViewModel,
+    medicineId:String,
     onBack: () -> Unit
 ) {
     val selectedMedicine by viewModel.selectedMedicine.collectAsState()
+    LaunchedEffect(selectedMedicine) {
+        println("Selected Medicine in Detail Screen: $selectedMedicine")
+    }
+    LaunchedEffect(medicineId) {
+        viewModel.getMedicineById(medicineId)
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -42,7 +51,7 @@ fun MedicineDetailScreen(
             )
         }
     ) { paddingValues ->
-        selectedMedicine?.let { medicine ->
+        selectedMedicine.let { medicine ->
             Column(
                 modifier = Modifier
                     .padding(paddingValues)
@@ -50,22 +59,22 @@ fun MedicineDetailScreen(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = medicine.name,
+                    text = medicine?.name ?: "No Medicine Selected",
                     style = MaterialTheme.typography.headlineMedium
                 )
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Dose: ${medicine.dose}",
+                    text = "Dose: ${medicine?.dose}",
                     style = MaterialTheme.typography.bodyLarge
                 )
 
                 Text(
-                    text = "Strength: ${medicine.strength}",
+                    text = "Strength: ${medicine?.strength}",
                     style = MaterialTheme.typography.bodyLarge
                 )
 
-                medicine.description?.let { description ->
+                medicine?.description?.let { description ->
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
                         text = "Description: $description",
