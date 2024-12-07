@@ -54,13 +54,20 @@ fun MedicineListScreen(
             }
         }
 
-        // Medicine List
-        LazyColumn {
-            items(medicines) { medicine ->
-                MedicineListItem(
-                    medicine = medicine,
-                    onClick = { onMedicineClick(medicine) }
-                )
+        if(medicines.isEmpty()){
+            Text(
+                text = "No medicines available.",
+                style = MaterialTheme.typography.bodyLarge,
+                modifier = Modifier.padding(16.dp)
+            )
+        }else {
+            LazyColumn {
+                items(medicines) { medicine ->
+                    MedicineListItem(
+                        medicine = medicine,
+                        onClick = { onMedicineClick(medicine) }
+                    )
+                }
             }
         }
     }
