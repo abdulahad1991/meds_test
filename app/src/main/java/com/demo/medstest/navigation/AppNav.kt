@@ -1,6 +1,7 @@
 package com.demo.medstest.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -34,15 +35,18 @@ fun AppNav(navController: NavHostController) {
                 viewModel = viewModel,
                 username = username,
                 onMedicineClick = { medicine ->
-                    viewModel.selectMedicine(medicine)
-                    navController.navigate("medicine_detail")
+                    navController.navigate("medicine_detail/${medicine.id}")
                 }
             )
         }
-        composable("medicine_detail") {
+        composable(route = "medicine_detail/{medicineId}",
+            arguments = listOf(navArgument("medicineId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val medicineId = backStackEntry.arguments?.getString("medicineId")
             val viewModel: MedicineViewModel = hiltViewModel()
             MedicineDetailScreen(
                 viewModel = viewModel,
+                medicineId = medicineId ?: "",
                 onBack = { navController.navigateUp() }
             )
         }

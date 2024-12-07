@@ -33,7 +33,11 @@ class MedicineViewModel @Inject constructor(
         }
     }
 
-    fun selectMedicine(medicine: Medicine) {
-        _selectedMedicine.value = medicine
+    fun getMedicineById(id: String?) {
+        viewModelScope.launch {
+            repository.getMedicinesById(id.toString()).collect { medicine ->
+                _selectedMedicine.value = medicine
+            }
+        }
     }
 }

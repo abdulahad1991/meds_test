@@ -32,11 +32,9 @@ fun MedicineListScreen(
 ) {
     val medicines by viewModel.medicines.collectAsState()
     val loginViewModel: LoginViewModel = hiltViewModel()
-//    val username by loginViewModel.username.collectAsState()
     val greeting = loginViewModel.getGreeting()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        // Greeting and User Info
         Card(
             modifier = Modifier
                 .fillMaxWidth()
