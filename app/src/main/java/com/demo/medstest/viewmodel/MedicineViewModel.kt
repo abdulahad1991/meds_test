@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.demo.medstest.data.model.Medicine
 import com.demo.medstest.data.repo.MedicineRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -26,7 +28,7 @@ class MedicineViewModel @Inject constructor(
     }
 
     private fun fetchMedicines() {
-        viewModelScope.launch {
+        viewModelScope.launch() {
             repository.getMedicines().collect { medicineList ->
                 _medicines.value = medicineList
             }
@@ -34,7 +36,7 @@ class MedicineViewModel @Inject constructor(
     }
 
     fun getMedicineById(id: String?) {
-        viewModelScope.launch {
+        viewModelScope.launch() {
             repository.getMedicinesById(id.toString()).collect { medicine ->
                 _selectedMedicine.value = medicine
             }

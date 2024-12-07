@@ -77,18 +77,13 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.junit.ktx)
+    implementation(libs.core)
     ksp(libs.room.compiler)
     implementation(libs.androidx.room.ktx)
 
-
-//    ksp(libs.hilt.compiler)
-//    implementation(libs.hilt.android)
-//    kapt(libs.hilt.compiler)
-
-
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-
+    implementation(libs.hilt.android.v2511)
+    kapt(libs.com.google.dagger.hilt.android.compiler4)
 
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
@@ -102,10 +97,24 @@ dependencies {
     implementation(libs.converter.moshi)
 
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.inline)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.core.testing)
+
+    androidTestImplementation(libs.androidx.runner)
+    androidTestImplementation(libs.androidx.junit.v115)
+    androidTestImplementation(libs.androidx.espresso.core.v351)
+
+    androidTestImplementation(libs.hilt.android.testing.v248)
+    kaptAndroidTest(libs.hilt.android.compiler.v248)
+
+    testImplementation(libs.com.google.dagger.hilt.android.testing2)
+    kaptTest(libs.com.google.dagger.hilt.android.compiler4)
+    testAnnotationProcessor(libs.com.google.dagger.hilt.android.compiler4)
+
+    androidTestImplementation(libs.com.google.dagger.hilt.android.testing2)
+    androidTestAnnotationProcessor(libs.com.google.dagger.hilt.android.compiler4)
+
+
 }
